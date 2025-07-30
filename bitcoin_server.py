@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, render_template_string
 from flask_cors import CORS
 import requests
@@ -492,8 +493,9 @@ def calculate_stochastic(highs, lows, closes, period):
     return k, d
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
     print("🚀 비트코인 실시간 분석기 시작!")
-    print("📊 브라우저에서 http://localhost:5000 접속하세요")
+    print(f"📊 서버가 포트 {port}에서 실행됩니다")
     print("⚠️  Ctrl+C로 종료")
     
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=False, host='0.0.0.0', port=port)
