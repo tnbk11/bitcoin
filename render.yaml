@@ -1,8 +1,13 @@
 services:
   - type: web
-    name: bitcoin-app
-    env: node
+    name: bitcoin-analyzer
+    env: python
     plan: free
-    buildCommand: npm install
-    startCommand: node index.js
-    autoDeploy: true
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bitcoin_server.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+      - key: FLASK_ENV
+        value: production
+    healthCheckPath: /api/bitcoin
